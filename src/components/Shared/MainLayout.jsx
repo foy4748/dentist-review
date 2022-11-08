@@ -1,6 +1,8 @@
 import NavBar from "./Navbar";
 import FooterSection from "./Footer";
 
+import { Toaster } from "react-hot-toast";
+
 import { Outlet, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -24,6 +26,7 @@ export default function MainLayout() {
     <>
       <AuthContext>
         <NavBar darkActive={darkActive} setDarkActive={setDarkActive} />
+        <Toaster />
         <section
           className={`${styles.mainContainer} ${
             darkActive ? styles.darkTheme : ""

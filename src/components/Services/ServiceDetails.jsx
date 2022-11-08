@@ -3,9 +3,14 @@ import { useParams, useLocation, Link } from "react-router-dom";
 import { userContext, auth } from "../../Contexts/AuthContext.jsx";
 import StarRatings from "react-star-ratings";
 
-import Loader from "../Shared/Loader";
+import styles from "./ServiceDetails.module.css";
 
-import { Form } from "react-bootstrap";
+import Loader from "../Shared/Loader";
+import Comment from "./Comment";
+
+import toast from "react-hot-toast";
+
+import { Form, Container } from "react-bootstrap";
 
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
@@ -56,26 +61,43 @@ export default function ServiceDetails() {
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
+    e.target.reset();
+    try {
+      const { displayName, email } = auth.currentUser;
+      const payload = {
+        rating,
+        review,
+        email,
+        displayName,
+        time: new Date(),
+      };
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          service_id: id,
+          authtoken,
+        },
+        body: JSON.stringify(payload),
+      };
 
-    const { displayName, email } = auth.currentUser;
-    const payload = { rating, review, email, displayName, time: new Date() };
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        service_id: id,
-        authtoken,
-      },
-      body: JSON.stringify(payload),
-    };
-
-    const res = await fetch(`${SERVER}/comments`, options);
-    const result = await res.json();
-    console.log(result);
+      const res = await fetch(`${SERVER}/comments`, options);
+      const result = await res.json();
+      if (!result.error) {
+        toast.success("Successfully Posted Review");
+        const newItem = { ...payload, _id: result.insertedId };
+        const newSet = [newItem, ...reviews];
+        setReviews(newSet);
+      } else {
+        toast.error("FAILED to post review");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("FAILED to post review");
+    }
   };
 
   const changeRating = (newRating) => {
-    console.log(newRating);
     setRating(newRating);
   };
 
@@ -120,39 +142,47 @@ export default function ServiceDetails() {
   return (
     <>
       {/* Non FUNCTIONAL COMPONENT*/}
-      <section>
-        <h1>ServiceDetails page</h1>
+      <Container>
         <div>
-          <h1 className="d-block d-md-none">{title}</h1>
-          <div className="d-md-flex border">
+          <h1 className="d-block d-lg-none">{title}</h1>
+          <div className="d-lg-flex border">
             <picture className="d-flex justify-content-center align-items-center p-0">
               <img src={img} alt={title} className="detailsImg" />
             </picture>
             <section className="d-flex align-items-center px-5 mt-4">
               <div>
-                <h1 className="d-none d-md-block">{title}</h1>
+                <h1 className="d-none d-lg-block">{title}</h1>
                 <h2>Price: $ {price}</h2>
                 <h2>Description</h2>
-                <p>{description}</p>
+                <p className="text-justify">{description}</p>
               </div>
             </section>
           </div>
         </div>
-      </section>
+      </Container>
       {/* Non FUNCTIONAL COMPONENT*/}
-      <section>
+      <Container className="mt-5">
         <h1>Reviews</h1>
         <div>
           <div className="form-container">
             <h2>Add Review </h2>
             {!auth.currentUser && loginJSX}
             {auth.currentUser && formJSX}
-            <div>
-              {loading2 ? <Loader /> : <p> {JSON.stringify(reviews)}</p>}
-            </div>
+          </div>
+          <div>
+            {loading2 ? (
+              <Loader />
+            ) : (
+              <div className={styles.commentContainer}>
+                {" "}
+                {reviews.map((item) => (
+                  <Comment key={item._id} details={item} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      </section>
+      </Container>
     </>
   );
 }
