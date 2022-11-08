@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-//import Loader from "../Shared/Loader";
-import Loader from "./Loader";
+import Loader from "../Shared/Loader";
 
 import { Form } from "react-bootstrap";
 
@@ -11,9 +11,10 @@ const SERVER =
 export default function ServiceDetails() {
   const [service, setService] = useState({});
   const [loading, setLoading] = useState(true);
+  const { id } = useParams();
 
   useEffect(() => {
-    fetch(`${SERVER}/service/63694a76069a6e37d0afa78a`)
+    fetch(`${SERVER}/service/${id}`)
       .then((res) => res.json())
       .then(({ data }) => {
         setService(data);

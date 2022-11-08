@@ -3,8 +3,9 @@ const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
 
 import { Container, Row, Col } from "react-bootstrap";
-//import Loader from "../Shared/Loader";
-import Loader from "./Loader";
+
+import Loader from "../Shared/Loader";
+
 import ServiceCard from "./ServiceCard";
 export default function Services() {
   const [services, setServices] = useState([]);

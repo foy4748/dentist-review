@@ -1,10 +1,10 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { RouterProvider } from "react-router-dom";
+import router from "./Routes/router";
 
-import ServiceDetails from "./components/ServiceDetails";
-import Services from "./components/Services";
 function App() {
-  return <ServiceDetails />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
