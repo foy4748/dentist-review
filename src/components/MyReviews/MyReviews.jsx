@@ -7,6 +7,11 @@ import { Table } from "react-bootstrap";
 import moment from "moment";
 import toast from "react-hot-toast";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleXmark,
+  faPenToSquare,
+} from "@fortawesome/free-regular-svg-icons";
 export default function MyReview() {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
@@ -57,7 +62,21 @@ export default function MyReview() {
           <td>{service_title}</td>
           <td>{review}</td>
           <td>{rating}</td>
-          <td onClick={() => handleDelete(_id)}>(X)</td>
+          <td>
+            <FontAwesomeIcon
+              title="Delete Review"
+              onClick={() => handleDelete(_id)}
+              icon={faCircleXmark}
+              style={{ fontSize: "1rem" }}
+            />{" "}
+          </td>
+          <td>
+            <FontAwesomeIcon
+              title="Edit Review"
+              icon={faPenToSquare}
+              style={{ fontSize: "1rem" }}
+            />
+          </td>
         </tr>
       </>
     );
@@ -75,7 +94,8 @@ export default function MyReview() {
                 <th>Service Name</th>
                 <th>Review</th>
                 <th>Rating</th>
-                <th>X</th>
+                <th title="Delete Review">❌</th>
+                <th title="Edit Review">✏</th>
               </tr>
             </thead>
             <tbody>

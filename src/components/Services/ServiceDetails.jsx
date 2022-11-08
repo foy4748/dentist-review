@@ -61,7 +61,6 @@ export default function ServiceDetails() {
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
-    e.target.reset();
     try {
       const { displayName, email } = auth.currentUser;
       const payload = {
@@ -88,6 +87,8 @@ export default function ServiceDetails() {
         toast.success("Successfully Posted Review");
         const newItem = { ...payload, _id: result.insertedId };
         const newSet = [newItem, ...reviews];
+        setReview("");
+        setRating(5);
         setReviews(newSet);
       } else {
         toast.error("FAILED to post review");
@@ -119,6 +120,7 @@ export default function ServiceDetails() {
         <Form.Label>Enter Review</Form.Label>
         <Form.Control
           as="textarea"
+          name="review"
           value={review}
           onChange={(e) => setReview(e.target.value)}
           rows={3}
