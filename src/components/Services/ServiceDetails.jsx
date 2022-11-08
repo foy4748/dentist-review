@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { userContext, auth } from "../../Contexts/AuthContext.jsx";
+import StarRatings from "react-star-ratings";
 
 import Loader from "../Shared/Loader";
 
@@ -9,11 +10,18 @@ import { Form } from "react-bootstrap";
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
 
+const authtoken = localStorage.getItem("authtoken");
+
 export default function ServiceDetails() {
+  const { authLoading } = useContext(userContext);
   const [service, setService] = useState({});
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const { id } = useParams();
+
+  // Form Values
+  const [review, setReview] = useState("");
+  const [rating, setRating] = useState(5);
 
   useEffect(() => {
     fetch(`${SERVER}/service/${id}`)
@@ -25,19 +33,54 @@ export default function ServiceDetails() {
       .catch((error) => console.error(error));
   }, []);
 
-  if (loading) {
+  if (loading || authLoading) {
     return <Loader />;
   }
 
-  const { title, price, description, img } = service;
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault();
+
+    const { displayName, email } = auth.currentUser;
+    const payload = { rating, review, email, displayName, time: new Date() };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        service_id: id,
+        authtoken,
+      },
+      body: JSON.stringify(payload),
+    };
+
+    const res = await fetch(`${SERVER}/comments`, options);
+    const result = await res.json();
+    console.log(result);
+  };
+
+  const changeRating = (newRating) => {
+    console.log(newRating);
+    setRating(newRating);
+  };
 
   // JSX Elements for conditional rendering
+  const { title, price, description, img } = service;
   const formJSX = (
-    <Form>
+    <Form onSubmit={handleReviewSubmit}>
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <div>
+          <StarRatings
+            rating={rating}
+            starRatedColor="#fdff6c"
+            changeRating={changeRating}
+            numberOfStars={5}
+            name="rating"
+          />
+        </div>
         <Form.Label>Enter Review</Form.Label>
         <Form.Control
           as="textarea"
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
           rows={3}
           placeholder="Write your opinions"
         />
@@ -59,6 +102,7 @@ export default function ServiceDetails() {
   // --------------------------------------
   return (
     <>
+      {/* Non FUNCTIONAL COMPONENT*/}
       <section>
         <h1>ServiceDetails page</h1>
         <div>
@@ -78,6 +122,7 @@ export default function ServiceDetails() {
           </div>
         </div>
       </section>
+      {/* Non FUNCTIONAL COMPONENT*/}
       <section>
         <h1>Reviews</h1>
         <div>
