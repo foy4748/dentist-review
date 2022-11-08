@@ -2,13 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 
 import MainLayout from "../components/Shared/MainLayout";
 
+// Route handlers
+import ErrorPage from "../components/Shared/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
+
 // Auth Pages
 import Login from "../components/AuthPages/Login";
 import Register from "../components/AuthPages/Register";
-
-// Route handlers
-import ErrorPage from "../components/Shared/ErrorPage";
-//import PrivateRoute from "./PrivateRoute";
 
 // Testing Purpose
 //import Test from "../components/Shared/Test";
@@ -16,6 +16,13 @@ import ErrorPage from "../components/Shared/ErrorPage";
 // Service Pages
 import Services from "../components/Services/Services";
 import ServiceDetails from "../components/Services/ServiceDetails";
+
+// Private Routes ------
+// My Reviews
+import MyReviews from "../components/MyReviews/MyReviews";
+
+// Add Service
+import AddService from "../components/AddService/AddService";
 
 const routerObj = [
   {
@@ -35,8 +42,25 @@ const routerObj = [
         element: <Services />,
       },
       {
-        path: "/service/:id",
+        path: "/services/:id",
         element: <ServiceDetails />,
+      },
+      {
+        path: "/my-reviews",
+        element: (
+          <PrivateRoute>
+            <MyReviews />
+          </PrivateRoute>
+        ),
+      },
+
+      {
+        path: "/add-service",
+        element: (
+          <PrivateRoute>
+            <AddService />
+          </PrivateRoute>
+        ),
       },
       {
         path: "*",

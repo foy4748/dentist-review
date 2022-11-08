@@ -99,6 +99,28 @@ export default function NavBar({ darkActive, setDarkActive }) {
       </>
     );
   };
+  // My Reviews , Add a service, Logout buttons
+  const privateNavItems = () => {
+    return (
+      <>
+        <Nav.Link as={NavLink} onClick={closeMenu} to="/my-reviews">
+          My Reviews
+        </Nav.Link>{" "}
+        <Nav.Link as={NavLink} onClick={closeMenu} to="/add-service">
+          Add Service
+        </Nav.Link>{" "}
+        <Nav.Link
+          onClick={() => {
+            closeMenu();
+            handleLogOut();
+          }}
+          to="#"
+        >
+          Log Out
+        </Nav.Link>{" "}
+      </>
+    );
+  };
   //-------------------------
 
   // Light & Dark Theme Switch JSX
@@ -155,6 +177,7 @@ export default function NavBar({ darkActive, setDarkActive }) {
               <Nav.Link as={NavLink} onClick={closeMenu} to="/services">
                 Services
               </Nav.Link>
+              {activeUser && activeUser.uid && privateNavItems()}
             </Nav>
             <Nav>
               {darkActive ? dark : light}

@@ -70,6 +70,7 @@ export default function ServiceDetails() {
         email,
         displayName,
         time: new Date(),
+        service_title: service.title,
       };
       const options = {
         method: "POST",

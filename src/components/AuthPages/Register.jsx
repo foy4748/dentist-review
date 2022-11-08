@@ -115,6 +115,7 @@ export default function Register() {
             type="text"
             placeholder="Full Name"
             name="displayName"
+            required
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPhotoURL">

@@ -19,8 +19,8 @@ export default function ServiceCard({ details }) {
             : `${description.slice(0, 99)} ...`}
         </p>
       </div>
-      <Link to={`/service/${_id}`}>
-        <button className="cardBtn"> See Details </button>
+      <Link to={`/services/${_id}`}>
+        <button className="cardBtn"> View Details </button>
       </Link>
     </div>
   );
