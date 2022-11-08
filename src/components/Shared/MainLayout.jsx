@@ -1,4 +1,4 @@
-//import NavBar from "./Navbar";
+import NavBar from "./Navbar";
 import FooterSection from "./Footer";
 
 import { Outlet, useLocation } from "react-router-dom";
@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import styles from "./MainLayout.module.css";
 
 //For Context API purpose
-//import AuthContext from "../../Contexts/AuthContext";
+import AuthContext from "../../Contexts/AuthContext";
 
 export default function MainLayout() {
   const [darkActive, setDarkActive] = useState(false);
@@ -22,16 +22,18 @@ export default function MainLayout() {
 
   return (
     <>
-      <section
-        className={`${styles.mainContainer} ${
-          darkActive ? styles.darkTheme : ""
-        } `}
-      >
-        <Outlet />
-      </section>
-      <FooterSection />
+      <AuthContext>
+        <NavBar darkActive={darkActive} setDarkActive={setDarkActive} />
+        <section
+          className={`${styles.mainContainer} ${
+            darkActive ? styles.darkTheme : ""
+          } `}
+        >
+          <Outlet />
+        </section>
+        <FooterSection />
+      </AuthContext>
+      ;
     </>
   );
 }
-// <NavBar darkActive={darkActive} setDarkActive={setDarkActive} />
-//<AuthContext></AuthContext>;

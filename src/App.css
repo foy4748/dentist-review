@@ -6,6 +6,20 @@
 .text-justify {
   text-align: justify;
 }
+
+.brandLogo {
+  width: 1.5rem;
+}
+
+.cardImg {
+  width: 100%;
+}
+.userIcon {
+  width: 1.75rem;
+  max-height: 1.75rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
 .btnPrimary {
   background-color: var(--primary-color);
   border: none;
@@ -17,6 +31,7 @@
   background-color: var(--primary-color);
   border: none;
   font-weight: 700;
+  width: 100%;
 }
 
 .detailsImg {

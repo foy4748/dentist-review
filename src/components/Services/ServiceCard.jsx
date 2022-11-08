@@ -1,4 +1,4 @@
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function ServiceCard({ details }) {
   const { title, price, img, description, _id } = details;
   return (
@@ -19,7 +19,9 @@ export default function ServiceCard({ details }) {
             : `${description.slice(0, 99)} ...`}
         </p>
       </div>
-      <button className="cardBtn"> Read More </button>
+      <Link to={`/service/${_id}`}>
+        <button className="cardBtn"> See Details </button>
+      </Link>
     </div>
   );
 }

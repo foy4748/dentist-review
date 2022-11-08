@@ -1,7 +1,7 @@
 .mainContainer {
   margin-top: 3.5rem;
   border-bottom: 1px solid #00b8cb52;
-  padding: 4rem;
+  padding: 2rem;
 }
 
 .mainContainer a {
@@ -29,4 +29,12 @@
 .darkTheme {
   background-color: #272935 !important;
   color: lightgray !important;
+}
+
+@media screen and (min-width: 768px) {
+  .mainContainer {
+    margin-top: 3.5rem;
+    border-bottom: 1px solid #00b8cb52;
+    padding: 4rem;
+  }
 }
