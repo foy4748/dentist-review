@@ -15,7 +15,9 @@ const authtoken = localStorage.getItem("authtoken");
 export default function ServiceDetails() {
   const { authLoading } = useContext(userContext);
   const [service, setService] = useState({});
+  const [reviews, setReviews] = useState({});
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const location = useLocation();
   const { id } = useParams();
 
@@ -29,6 +31,21 @@ export default function ServiceDetails() {
       .then(({ data }) => {
         setService(data);
         setLoading(false);
+      })
+      .catch((error) => console.error(error));
+
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        service_id: id,
+      },
+    };
+
+    fetch(`${SERVER}/comments`, options)
+      .then((res) => res.json())
+      .then(({ data }) => {
+        setReviews(data);
+        setLoading2(false);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -130,6 +147,9 @@ export default function ServiceDetails() {
             <h2>Add Review </h2>
             {!auth.currentUser && loginJSX}
             {auth.currentUser && formJSX}
+            <div>
+              {loading2 ? <Loader /> : <p> {JSON.stringify(reviews)}</p>}
+            </div>
           </div>
         </div>
       </section>
