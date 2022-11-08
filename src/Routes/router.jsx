@@ -3,11 +3,11 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../components/Shared/MainLayout";
 
 // Auth Pages
-//import Login from "../components/AuthPages/Login";
-//import Register from "../components/AuthPages/Register";
+import Login from "../components/AuthPages/Login";
+import Register from "../components/AuthPages/Register";
 
 // Route handlers
-//import ErrorPage from "../components/Shared/ErrorPage";
+import ErrorPage from "../components/Shared/ErrorPage";
 //import PrivateRoute from "./PrivateRoute";
 
 // Testing Purpose
@@ -23,23 +23,6 @@ const routerObj = [
     element: <MainLayout />,
     children: [
       {
-        path: "/services",
-        element: <Services />,
-      },
-      {
-        path: "/service/:id",
-        element: <ServiceDetails />,
-      },
-    ],
-  },
-];
-
-const router = createBrowserRouter(routerObj);
-
-export default router;
-
-/*
-      {
         path: "/login",
         element: <Login />,
       },
@@ -48,15 +31,21 @@ export default router;
         element: <Register />,
       },
       {
-        path: "/test",
-        element: (
-          <PrivateRoute>
-            <Test />
-          </PrivateRoute>
-        ),
+        path: "/services",
+        element: <Services />,
+      },
+      {
+        path: "/service/:id",
+        element: <ServiceDetails />,
       },
       {
         path: "*",
         element: <ErrorPage />,
       },
-*/
+    ],
+  },
+];
+
+const router = createBrowserRouter(routerObj);
+
+export default router;
