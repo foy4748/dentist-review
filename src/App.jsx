@@ -1,9 +1,9 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Services from "./components/Services";
+import ServiceDetails from "./components/ServiceDetails";
 function App() {
-  return <Services />;
+  return <ServiceDetails />;
 }
 
 export default App;

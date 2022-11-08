@@ -3,23 +3,33 @@
 }
 
 /* Utilities */
-.cardImg {
-  width: 100%;
-  min-height: 20rem;
-  object-fit: cover;
-}
-
-.min-card-height {
-  min-height: 36rem;
-}
-
-.cardBtn {
-  border-radius: 0 0 0.5rem 0.5rem;
-  background-color: var(--primary-color);
-  border: none;
-  font-weight: 700;
-}
-
 .text-justify {
   text-align: justify;
+}
+.detailsImg {
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  /* Utilities */
+  .cardImg {
+    width: 100%;
+    min-height: 20rem;
+    object-fit: cover;
+  }
+
+  .detailsImg {
+    width: 100%;
+    min-width: 40rem;
+  }
+
+  .min-card-height {
+    min-height: 36rem;
+  }
+
+  .cardBtn {
+    border-radius: 0 0 0.5rem 0.5rem;
+    background-color: var(--primary-color);
+    border: none;
+    font-weight: 700;
+  }
 }
