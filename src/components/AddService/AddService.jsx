@@ -15,8 +15,40 @@ export default function AddService() {
   const [price, setPrice] = useState(0);
   const [photoUrl, setPhotoUrl] = useState("");
 
-  const handleServiceSubmit = (e) => {
+  const handleServiceSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const payload = {
+        title,
+        description,
+        price,
+        img: photoUrl,
+        time: new Date(),
+      };
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authtoken,
+        },
+        body: JSON.stringify(payload),
+      };
+
+      const res = await fetch(`${SERVER}/services`, options);
+      const result = await res.json();
+      if (!result.error) {
+        setTitle("");
+        setDescription("");
+        setPrice(0);
+        setPhotoUrl("");
+        toast.success("Successfully posted a new Service");
+      } else {
+        toast.error("FAILED to post a new service");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("FAILED to post a new service");
+    }
   };
   return (
     <Container>

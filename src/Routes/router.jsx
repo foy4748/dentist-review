@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 
 import MainLayout from "../components/Shared/MainLayout";
 
+import Home from "../components/Home/Home";
+
 // Route handlers
 import ErrorPage from "../components/Shared/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
@@ -29,6 +31,10 @@ const routerObj = [
     path: "/",
     element: <MainLayout />,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "/login",
         element: <Login />,
