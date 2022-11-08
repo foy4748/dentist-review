@@ -1,5 +1,5 @@
 //import styles from "./Navbar.module.css";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import { useRef, useContext } from "react";
 
 import {
@@ -25,6 +25,7 @@ export default function NavBar({ darkActive, setDarkActive }) {
   // Executing Hooks
   const { setActiveUser, logOutHandler, authLoading } = useContext(userContext);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const activeUser = auth.currentUser;
   //--------------------------------------
@@ -40,6 +41,7 @@ export default function NavBar({ darkActive, setDarkActive }) {
     logOutHandler().then(() => {
       window.localStorage.clear("authtoken");
       setActiveUser(null);
+      navigate("/");
     });
   };
   //--------------------------------------

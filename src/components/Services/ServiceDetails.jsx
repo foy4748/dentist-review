@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams, useLocation, Link } from "react-router-dom";
+import { userContext, auth } from "../../Contexts/AuthContext.jsx";
 
 import Loader from "../Shared/Loader";
 
@@ -11,6 +12,7 @@ const SERVER =
 export default function ServiceDetails() {
   const [service, setService] = useState({});
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
   const { id } = useParams();
 
   useEffect(() => {
@@ -29,6 +31,32 @@ export default function ServiceDetails() {
 
   const { title, price, description, img } = service;
 
+  // JSX Elements for conditional rendering
+  const formJSX = (
+    <Form>
+      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form.Label>Enter Review</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
+          placeholder="Write your opinions"
+        />
+      </Form.Group>
+      <button type="submit" className="btnPrimary">
+        Submit Review
+      </button>
+    </Form>
+  );
+  const loginJSX = (
+    <p>
+      Please,
+      <Link to="/login" state={{ from: location }}>
+        Login
+      </Link>{" "}
+      to post review
+    </p>
+  );
+  // --------------------------------------
   return (
     <>
       <section>
@@ -54,23 +82,9 @@ export default function ServiceDetails() {
         <h1>Reviews</h1>
         <div>
           <div className="form-container">
-            <h2>Add Review</h2>
-            <Form>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
-              >
-                <Form.Label>Enter Review</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  placeholder="Write your opinions"
-                />
-              </Form.Group>
-              <button type="submit" className="btnPrimary">
-                Submit Review
-              </button>
-            </Form>
+            <h2>Add Review </h2>
+            {!auth.currentUser && loginJSX}
+            {auth.currentUser && formJSX}
           </div>
         </div>
       </section>
