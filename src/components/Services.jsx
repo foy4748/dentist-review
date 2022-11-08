@@ -37,7 +37,7 @@ export default function Services() {
         <Row xs={1} md={2} lg={3} className="g-4">
           {services || !services.error ? (
             services.map((item) => {
-              return <Col> {serviceCardsJSX(item)}</Col>;
+              return <Col key={item._id}> {serviceCardsJSX(item)}</Col>;
             })
           ) : (
             <Loader />

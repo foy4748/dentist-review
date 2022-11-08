@@ -1,10 +1,10 @@
 //import { Link } from "react-router-dom";
 export default function ServiceCard({ details }) {
-  const { title, price, description, _id } = details;
+  const { title, price, img, description, _id } = details;
   return (
     <div className="d-flex flex-column justify-content-between min-card-height border rounded">
       <picture>
-        <img src={`/${title}.jpg`} alt="" className="cardImg" />
+        <img src={img} alt="" className="cardImg" />
       </picture>
 
       <div className="p-3">
