@@ -9,6 +9,7 @@ import styles from "./Register.module.css";
 const AppName = import.meta.env.VITE_AppName;
 
 import Loader from "../Shared/Loader";
+import toast from "react-hot-toast";
 
 export default function Register() {
   //Executing Hooks
@@ -53,6 +54,7 @@ export default function Register() {
         await requestToken(user.uid);
         setActiveUser(user);
         form.reset();
+        toast.success("Successfully Registered New Account");
         if (displayName && photoURL) {
           handleUpdate(profileObj);
         }
@@ -66,6 +68,7 @@ export default function Register() {
         }
       })
       .catch((error) => {
+        toast.error("FAILED to Register");
         setAuthLoading(false);
         setError(error);
       });
@@ -82,6 +85,7 @@ export default function Register() {
     googleLoginHandler()
       .then(async ({ user }) => {
         await requestToken(user.uid);
+        toast.success("Successfully Registered New Account");
         setActiveUser(user);
         if (location?.state?.from) {
           navigate(location?.state?.from, { replace: true });
@@ -93,6 +97,7 @@ export default function Register() {
         }
       })
       .catch((error) => {
+        toast.error("FAILED to Register");
         setAuthLoading(false);
         setError(error);
       });
@@ -103,7 +108,8 @@ export default function Register() {
     githubLoginHandler()
       .then(async ({ user }) => {
         await requestToken(user.uid);
-        await setActiveUser(user);
+        setActiveUser(user);
+        toast.success("Successfully Registered New Account");
         if (location?.state?.from) {
           navigate(location?.state?.from, { replace: true });
           return;
@@ -114,6 +120,7 @@ export default function Register() {
         }
       })
       .catch((error) => {
+        toast.error("FAILED to Register");
         setAuthLoading(false);
         setError(error);
       });

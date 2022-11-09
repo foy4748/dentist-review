@@ -6,6 +6,8 @@ import { Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
 
+import toast from "react-hot-toast";
+
 import styles from "./Register.module.css";
 
 import Loader from "../Shared/Loader";
@@ -49,12 +51,14 @@ export default function Login() {
         await requestToken(user.uid);
         setActiveUser(user);
         form.reset();
+        toast.success("Successfully Logged In");
         navigate(location?.state?.from || location?.state?.prev || "/", {
           replace: true,
         });
       })
       .catch((error) => {
         console.error(error);
+        toast.error("FAILED to Login");
         setError(error.message);
         setAuthLoading(false);
       });
@@ -66,12 +70,14 @@ export default function Login() {
       .then(async ({ user }) => {
         await requestToken(user.uid);
         setActiveUser(user);
+        toast.success("Successfully Logged In");
         navigate(location?.state?.from || location?.state?.prev || "/", {
           replace: true,
         });
       })
       .catch((error) => {
         setError(error);
+        toast.error("FAILED to Login");
         setAuthLoading(false);
       });
   };
@@ -82,12 +88,14 @@ export default function Login() {
       .then(async ({ user }) => {
         await requestToken(user.uid);
         setActiveUser(user);
+        toast.success("Successfully Logged In");
         navigate(location?.state?.from || location?.state?.prev || "/", {
           replace: true,
         });
       })
       .catch((error) => {
         setError(error);
+        toast.error("FAILED to Login");
         setAuthLoading(false);
       });
   };
