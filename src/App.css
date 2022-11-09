@@ -1,5 +1,6 @@
 :root {
   --primary-color: #686dffa8;
+  --primary-color: #00b8cb;
 }
 
 /* Utilities */
@@ -33,12 +34,14 @@
 }
 .btnPrimary {
   background-color: var(--primary-color);
+  color: white;
   border: none;
   font-weight: 700;
   border-radius: 0.5rem;
   padding: 0.5rem 1.5rem;
 }
 .cardBtn {
+  color: white;
   border-radius: 0 0 0.5rem 0.5rem;
   background-color: var(--primary-color);
   border: none;
@@ -53,6 +56,30 @@
 .form-container {
   max-width: 400px;
   margin: 0 auto;
+}
+
+/* Carausel Styling */
+.carauselContainer {
+  width: 100%;
+}
+
+.carauselImg {
+  object-fit: cover;
+  min-height: 70vh;
+  max-height: 80vh;
+  filter: contrast(90%) brightness(50%);
+}
+
+.centeringCaption {
+  top: 10%;
+}
+
+.leftPart {
+  text-align: left;
+}
+
+.rightPart {
+  text-align: left;
 }
 
 @media screen and (min-width: 768px) {
@@ -70,5 +97,9 @@
 
   .min-card-height {
     min-height: 36rem;
+  }
+
+  .leftPart {
+    text-align: right;
   }
 }

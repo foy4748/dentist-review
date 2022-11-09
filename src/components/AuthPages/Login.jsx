@@ -1,7 +1,7 @@
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { userContext } from "../../Contexts/AuthContext";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -140,31 +140,29 @@ export default function Login() {
           </p>
           {error ? <p style={{ color: "red" }}>"Wrong email/password"</p> : ""}
         </Form.Group>
-        <Button className="border readBtn" variant="outline-dark" type="submit">
+        <button className="border btnPrimary" type="submit">
           Submit
-        </Button>
+        </button>
       </Form>
       <hr />
       <h1 className="text-center">Continue using</h1>
       <div className="d-flex justify-content-center">
-        <Button
+        <button
           onClick={handlerGoogleLogin}
-          className="border readBtn"
-          variant="outline-dark"
+          className="border btnPrimary"
           type="submit"
         >
           {" "}
           <FontAwesomeIcon icon={faGoogle} /> Google{" "}
-        </Button>
-        <Button
+        </button>
+        <button
           onClick={handlerGithubLogin}
-          className="border readBtn"
-          variant="outline-dark"
+          className="border btnPrimary"
           type="submit"
         >
           {" "}
           <FontAwesomeIcon icon={faGithub} /> Github{" "}
-        </Button>
+        </button>
       </div>
     </div>
   );

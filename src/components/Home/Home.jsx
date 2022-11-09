@@ -8,6 +8,7 @@ import { PhotoProvider } from "react-photo-view";
 
 import ServiceCard from "../Services/ServiceCard";
 // Dumb Components
+import Banner from "./Banner";
 import Hero from "./Hero";
 import FeatureCards from "./FeatureCards";
 
@@ -30,29 +31,32 @@ export default function Home() {
       });
   });
   return (
-    <div>
-      <Container>
-        <PhotoProvider>
-          <Row xs={1} md={2} lg={3} className="g-4">
-            {services &&
-              services.map((item) => (
-                <ServiceCard key={item._id} details={item} />
-              ))}
-          </Row>
-        </PhotoProvider>
-        <div className="d-flex justify-content-center my-5">
-          <Link to="/services">
-            {" "}
-            <button className="btnPrimary">See All</button>
-          </Link>
-        </div>
-      </Container>
-      <Container>
-        <FeatureCards />
-      </Container>
-      <Container>
-        <Hero />
-      </Container>
-    </div>
+    <>
+      <Banner services={services} />
+      <div>
+        <Container>
+          <PhotoProvider>
+            <Row xs={1} md={2} lg={3} className="g-4">
+              {services &&
+                services.map((item) => (
+                  <ServiceCard key={item._id} details={item} />
+                ))}
+            </Row>
+          </PhotoProvider>
+          <div className="d-flex justify-content-center my-5">
+            <Link to="/services">
+              {" "}
+              <button className="btnPrimary">See All</button>
+            </Link>
+          </div>
+        </Container>
+        <Container>
+          <FeatureCards />
+        </Container>
+        <Container>
+          <Hero />
+        </Container>
+      </div>
+    </>
   );
 }
