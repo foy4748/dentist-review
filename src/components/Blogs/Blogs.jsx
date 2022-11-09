@@ -57,7 +57,7 @@ export default function Blogs() {
         <div className={styles.singleBlog}>
           <h1>2. What is JWT, and how does it work?</h1>
           <p className={styles.answer}>
-            JWT stands for <storng>JSON Web Token</storng>. JWT is the result of
+            JWT stands for <strong>JSON Web Token</strong>. JWT is the result of
             hashing a valid JSON string using a secret key and a proper hashing
             algorithm. In short, JWT is a hashed string. A JWT has three
             portions separated by two periods (.). They are — 1) Header, 2)

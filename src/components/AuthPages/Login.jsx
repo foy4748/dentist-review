@@ -1,5 +1,5 @@
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { userContext } from "../../Contexts/AuthContext";
 import { Form, Button } from "react-bootstrap";
 
@@ -8,26 +8,30 @@ import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import styles from "./Register.module.css";
 
+import Loader from "../Shared/Loader";
+
+const AppName = import.meta.env.VITE_AppName;
+
 export default function Login() {
   //Executing Hooks
   const {
-    activeUser,
+    authLoading,
     setActiveUser,
     loginHandler,
     googleLoginHandler,
     githubLoginHandler,
     requestToken,
   } = useContext(userContext);
+
   const [error, setError] = useState();
   const location = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
-  // Redirecting if User is Authenticated
-  /*
-  if (activeUser || activeUser?.uid) {
-    navigate(-1);
-  }
-	*/
+  useEffect(() => {
+    window.document.title = `${AppName} || Login`;
+    setLoading(false);
+  }, []);
 
   // Event handlers --------------------------
 
@@ -80,6 +84,10 @@ export default function Login() {
       .catch((error) => setError(error));
   };
   //--------------------------------------------
+
+  if (authLoading || loading) {
+    return <Loader />;
+  }
 
   return (
     <div className={styles.formContainer}>

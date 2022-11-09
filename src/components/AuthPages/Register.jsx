@@ -1,15 +1,19 @@
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { userContext } from "../../Contexts/AuthContext";
 import { Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
 import styles from "./Register.module.css";
 
+const AppName = import.meta.env.VITE_AppName;
+
+import Loader from "../Shared/Loader";
+
 export default function Register() {
   //Executing Hooks
   const {
-    activeUser,
+    authLoading,
     setActiveUser,
     registerHandler,
     googleLoginHandler,
@@ -18,13 +22,15 @@ export default function Register() {
     requestToken,
   } = useContext(userContext);
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(true);
+
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Redirecting if User is Authenticated
-  if (activeUser || activeUser?.uid) {
-    navigate(-1);
-  }
+  useEffect(() => {
+    window.document.title = `${AppName} || Register`;
+    setLoading(false);
+  }, []);
 
   // Event handlers --------------------------
 
@@ -49,9 +55,14 @@ export default function Register() {
         if (displayName && photoURL) {
           handleUpdate(profileObj);
         }
-        navigate(location?.state?.from || location?.state?.prev || "/", {
-          replace: true,
-        });
+        if (location?.state?.from) {
+          navigate(location?.state?.from, { replace: true });
+          return;
+        }
+        if (location?.state?.prev) {
+          navigate(location?.state?.prev, { replace: true });
+          return;
+        }
       })
       .catch((error) => setError(error));
   };
@@ -68,9 +79,14 @@ export default function Register() {
       .then(async ({ user }) => {
         await requestToken(user.uid);
         setActiveUser(user);
-        navigate(location?.state?.from || location?.state?.prev || "/", {
-          replace: true,
-        });
+        if (location?.state?.from) {
+          navigate(location?.state?.from, { replace: true });
+          return;
+        }
+        if (location?.state?.prev) {
+          navigate(location?.state?.prev, { replace: true });
+          return;
+        }
       })
       .catch((error) => setError(error));
   };
@@ -81,13 +97,22 @@ export default function Register() {
       .then(async ({ user }) => {
         await requestToken(user.uid);
         await setActiveUser(user);
-        navigate(location?.state?.from || location?.state?.prev || "/", {
-          replace: true,
-        });
+        if (location?.state?.from) {
+          navigate(location?.state?.from, { replace: true });
+          return;
+        }
+        if (location?.state?.prev) {
+          navigate(location?.state?.prev, { replace: true });
+          return;
+        }
       })
       .catch((error) => setError(error));
   };
   //--------------------------------------------
+
+  if (authLoading || loading) {
+    return <Loader />;
+  }
 
   return (
     <div className={styles.formContainer}>
