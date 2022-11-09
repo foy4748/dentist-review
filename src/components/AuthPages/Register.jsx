@@ -14,6 +14,7 @@ export default function Register() {
   //Executing Hooks
   const {
     authLoading,
+    setAuthLoading,
     setActiveUser,
     registerHandler,
     googleLoginHandler,
@@ -64,7 +65,10 @@ export default function Register() {
           return;
         }
       })
-      .catch((error) => setError(error));
+      .catch((error) => {
+        setAuthLoading(false);
+        setError(error);
+      });
   };
   // For adding displayName and photoURL
   const handleUpdate = (profileObj) => {
@@ -88,7 +92,10 @@ export default function Register() {
           return;
         }
       })
-      .catch((error) => setError(error));
+      .catch((error) => {
+        setAuthLoading(false);
+        setError(error);
+      });
   };
 
   /* Github PopUp SignIn Handler */
@@ -106,7 +113,10 @@ export default function Register() {
           return;
         }
       })
-      .catch((error) => setError(error));
+      .catch((error) => {
+        setAuthLoading(false);
+        setError(error);
+      });
   };
   //--------------------------------------------
 

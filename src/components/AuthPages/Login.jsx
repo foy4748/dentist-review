@@ -16,6 +16,7 @@ export default function Login() {
   //Executing Hooks
   const {
     authLoading,
+    setAuthLoading,
     setActiveUser,
     loginHandler,
     googleLoginHandler,
@@ -55,6 +56,7 @@ export default function Login() {
       .catch((error) => {
         console.error(error);
         setError(error.message);
+        setAuthLoading(false);
       });
   };
 
@@ -68,7 +70,10 @@ export default function Login() {
           replace: true,
         });
       })
-      .catch((error) => setError(error));
+      .catch((error) => {
+        setError(error);
+        setAuthLoading(false);
+      });
   };
 
   /* Github PopUp SignIn Handler */
@@ -81,7 +86,10 @@ export default function Login() {
           replace: true,
         });
       })
-      .catch((error) => setError(error));
+      .catch((error) => {
+        setError(error);
+        setAuthLoading(false);
+      });
   };
   //--------------------------------------------
 

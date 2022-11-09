@@ -93,6 +93,7 @@ export default function AuthContext({ children }) {
     setActiveUser,
     logOutHandler,
     requestToken,
+    setAuthLoading,
   };
   //------------------------------
   return (
