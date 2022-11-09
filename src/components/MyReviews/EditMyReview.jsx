@@ -4,6 +4,7 @@ import StarRatings from "react-star-ratings";
 
 import toast from "react-hot-toast";
 import { Form, Container } from "react-bootstrap";
+import Loader from "../Shared/Loader";
 
 import styles from "./EditMyReview.module.css";
 
@@ -13,6 +14,7 @@ const AppName = import.meta.env.VITE_AppName;
 
 export default function EditMyReview() {
   const [review, setReview] = useState({});
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
   const location = useLocation();
@@ -33,10 +35,14 @@ export default function EditMyReview() {
     fetch(`${SERVER}/my-comments/${id}`, options)
       .then((res) => res.json())
       .then(({ data }) => {
+        setLoading(false);
         setCurrentReview(data?.review);
         setCurrentRating(data?.rating);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        setLoading(false);
+        console.error(error);
+      });
   }, []);
 
   const changeRating = (newRating) => {
@@ -45,6 +51,7 @@ export default function EditMyReview() {
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const authtoken = localStorage.getItem("authtoken");
     try {
       const payload = {
@@ -68,11 +75,16 @@ export default function EditMyReview() {
         setCurrentReview("");
         setCurrentRating(5);
         navigate(location?.state?.from || "/");
+        setLoading(false);
       } else {
         toast.error("FAILED to edit review");
+        setLoading(false);
+        console.log(result);
       }
     } catch (error) {
       console.error(error);
+      console.error(error);
+      setLoading(false);
       toast.error("FAILED to edit review");
     }
   };
@@ -108,6 +120,10 @@ export default function EditMyReview() {
       </section>
     </>
   );
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return <div>{formJSX}</div>;
 }

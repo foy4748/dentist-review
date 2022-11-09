@@ -60,8 +60,10 @@ export default function ServiceDetails() {
     return <Loader />;
   }
 
+  // Handle Review Submit
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
+    setLoading2(true);
     const authtoken = localStorage.getItem("authtoken");
     try {
       const { displayName, email } = auth.currentUser;
@@ -91,12 +93,16 @@ export default function ServiceDetails() {
         const newSet = [newItem, ...reviews];
         setReview("");
         setRating(5);
+        setLoading2(false);
         setReviews(newSet);
       } else {
+        setLoading2(false);
         toast.error("FAILED to post review");
+        console.error(result);
       }
     } catch (error) {
       console.error(error);
+      setLoading2(false);
       toast.error("FAILED to post review");
     }
   };
@@ -177,7 +183,7 @@ export default function ServiceDetails() {
           <div className="form-container">
             <h2>Add Review </h2>
             {!auth.currentUser && loginJSX}
-            {auth.currentUser && formJSX}
+            {auth.currentUser && !loading2 ? formJSX : <Loader />}
           </div>
           <div>
             {loading2 ? (
