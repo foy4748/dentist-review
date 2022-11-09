@@ -27,7 +27,7 @@ export default function Banner({ services }) {
         <Carousel.Caption className="centeringCaption">
           <div className="d-flex justify-content-between">
             {commonLeftPartJSX}
-            <div className="d-none d-md-block rightPart">
+            <div className="d-none d-lg-block rightPart">
               <h1>{title}</h1>
               <p>Best equipments along side my care.</p>
               <p>

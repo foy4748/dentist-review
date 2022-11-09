@@ -37,10 +37,12 @@ export default function Home() {
         <Container>
           <h1>Latest Services</h1>
           <PhotoProvider>
-            <Row xs={1} md={2} lg={3} className="g-4">
+            <Row xs={1} lg={3} className="g-4">
               {services &&
                 services.map((item) => (
-                  <ServiceCard key={item._id} details={item} />
+                  <Col>
+                    <ServiceCard key={item._id} details={item} />
+                  </Col>
                 ))}
             </Row>
           </PhotoProvider>
@@ -51,10 +53,10 @@ export default function Home() {
             </Link>
           </div>
         </Container>
-        <Container>
+        <Container className="my-5">
           <FeatureCards />
         </Container>
-        <Container>
+        <Container className="my-5">
           <Hero />
         </Container>
       </div>
