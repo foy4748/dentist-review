@@ -40,6 +40,7 @@ export default function MyReview() {
   }, []);
 
   const handleDelete = async (id) => {
+    setLoading(true);
     try {
       const authtoken = localStorage.getItem("authtoken");
       const options = {
@@ -55,12 +56,16 @@ export default function MyReview() {
       if (!result.error) {
         const newSet = reviews.filter((item) => item._id !== id);
         setReviews(newSet);
+        setLoading(false);
         toast.success("Deleted Review");
       } else {
+        setLoading(false);
+        console.error(result);
         toast.error("FAILED to delete review");
       }
     } catch (error) {
       console.error(error);
+      setLoading(false);
       toast.error("FAILED to delete review");
     }
   };
