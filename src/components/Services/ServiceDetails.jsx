@@ -16,8 +16,6 @@ import { Form, Container } from "react-bootstrap";
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
 
-const authtoken = localStorage.getItem("authtoken");
-
 export default function ServiceDetails() {
   const { authLoading } = useContext(userContext);
   const [service, setService] = useState({});
@@ -62,6 +60,7 @@ export default function ServiceDetails() {
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
+    const authtoken = localStorage.getItem("authtoken");
     try {
       const { displayName, email } = auth.currentUser;
       const payload = {
@@ -106,6 +105,7 @@ export default function ServiceDetails() {
 
   // JSX Elements for conditional rendering
   const { title, price, description, img } = service;
+
   const formJSX = (
     <Form onSubmit={handleReviewSubmit}>
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">

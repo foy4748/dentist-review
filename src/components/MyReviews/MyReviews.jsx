@@ -32,6 +32,7 @@ export default function MyReview() {
 
   const handleDelete = async (id) => {
     try {
+      const authtoken = localStorage.getItem("authtoken");
       const options = {
         method: "DELETE",
         headers: {
@@ -74,7 +75,7 @@ export default function MyReview() {
             />{" "}
           </td>
           <td>
-            <Link to={`/reviews/${_id}`}>
+            <Link to={`/my-reviews/${_id}`}>
               {" "}
               <FontAwesomeIcon
                 title="Edit Review"

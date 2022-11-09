@@ -22,6 +22,7 @@ import ServiceDetails from "../components/Services/ServiceDetails";
 // Private Routes ------
 // My Reviews
 import MyReviews from "../components/MyReviews/MyReviews";
+import EditMyReview from "../components/MyReviews/EditMyReview";
 
 // Add Service
 import AddService from "../components/AddService/AddService";
@@ -60,6 +61,14 @@ const routerObj = [
         ),
       },
 
+      {
+        path: "/my-reviews/:id",
+        element: (
+          <PrivateRoute>
+            <EditMyReview />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/add-service",
         element: (
