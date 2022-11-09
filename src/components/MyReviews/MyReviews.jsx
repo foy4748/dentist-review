@@ -1,11 +1,13 @@
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
-const authtoken = localStorage.getItem("authtoken");
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
-import moment from "moment";
 import toast from "react-hot-toast";
+
+import moment from "moment";
+import styles from "./MyReviews.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,6 +17,7 @@ import {
 export default function MyReview() {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
+    const authtoken = localStorage.getItem("authtoken");
     const options = {
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +45,7 @@ export default function MyReview() {
       if (!result.error) {
         const newSet = reviews.filter((item) => item._id !== id);
         setReviews(newSet);
-        toast.success("Delted Review");
+        toast.success("Deleted Review");
       } else {
         toast.error("FAILED to delete review");
       }
@@ -71,18 +74,21 @@ export default function MyReview() {
             />{" "}
           </td>
           <td>
-            <FontAwesomeIcon
-              title="Edit Review"
-              icon={faPenToSquare}
-              style={{ fontSize: "1rem" }}
-            />
+            <Link to={`/reviews/${_id}`}>
+              {" "}
+              <FontAwesomeIcon
+                title="Edit Review"
+                icon={faPenToSquare}
+                style={{ fontSize: "1rem" }}
+              />
+            </Link>
           </td>
         </tr>
       </>
     );
   };
   return (
-    <div>
+    <div className={styles.myreviewContainer}>
       {reviews.length > 0 ? (
         <>
           <h1>My reviews</h1>
@@ -106,9 +112,9 @@ export default function MyReview() {
           </Table>
         </>
       ) : (
-        <>
+        <div className={styles.titleContainer}>
           <h1>No reviews yet</h1>
-        </>
+        </div>
       )}
     </div>
   );

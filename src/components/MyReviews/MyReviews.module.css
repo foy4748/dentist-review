@@ -1,0 +1,10 @@
+.titleContainer {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myreviewContainer {
+  min-height: 70vh;
+}

@@ -8,6 +8,7 @@ import styles from "./ServiceDetails.module.css";
 import Loader from "../Shared/Loader";
 import Comment from "./Comment";
 
+import { PhotoView, PhotoProvider } from "react-photo-view";
 import toast from "react-hot-toast";
 
 import { Form, Container } from "react-bootstrap";
@@ -150,7 +151,11 @@ export default function ServiceDetails() {
           <h1 className="d-block d-lg-none">{title}</h1>
           <div className="d-lg-flex border">
             <picture className="d-flex justify-content-center align-items-center p-0">
-              <img src={img} alt={title} className="detailsImg" />
+              <PhotoProvider>
+                <PhotoView src={img}>
+                  <img src={img} alt={title} className="detailsImg" />
+                </PhotoView>
+              </PhotoProvider>
             </picture>
             <section className="d-flex align-items-center px-5 mt-4">
               <div>

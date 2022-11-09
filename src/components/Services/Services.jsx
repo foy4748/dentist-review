@@ -3,6 +3,7 @@ const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
 
 import { Container, Row, Col } from "react-bootstrap";
+import { PhotoProvider } from "react-photo-view";
 
 import Loader from "../Shared/Loader";
 
@@ -35,15 +36,17 @@ export default function Services() {
     <div>
       <h1>Services</h1>
       <Container>
-        <Row xs={1} md={2} lg={3} className="g-4">
-          {services || !services.error ? (
-            services.map((item) => {
-              return <Col key={item._id}> {serviceCardsJSX(item)}</Col>;
-            })
-          ) : (
-            <Loader />
-          )}
-        </Row>
+        <PhotoProvider>
+          <Row xs={1} md={2} lg={3} className="g-4">
+            {services || !services.error ? (
+              services.map((item) => {
+                return <Col key={item._id}> {serviceCardsJSX(item)}</Col>;
+              })
+            ) : (
+              <Loader />
+            )}
+          </Row>
+        </PhotoProvider>
       </Container>
     </div>
   );

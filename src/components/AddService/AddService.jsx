@@ -1,6 +1,5 @@
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
-const authtoken = localStorage.getItem("authtoken");
 import styles from "./AddService.module.css";
 
 import { Form, Button, Container } from "react-bootstrap";
@@ -25,6 +24,7 @@ export default function AddService() {
         img: photoUrl,
         time: new Date(),
       };
+      const authtoken = localStorage.getItem("authtoken");
       const options = {
         method: "POST",
         headers: {

@@ -3,6 +3,7 @@ const SERVER =
 
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { PhotoProvider } from "react-photo-view";
 
 import ServiceCard from "../Services/ServiceCard";
 
@@ -26,12 +27,14 @@ export default function Home() {
   return (
     <div>
       <Container>
-        <Row xs={1} md={2} lg={3} className="g-4">
-          {services &&
-            services.map((item) => (
-              <ServiceCard key={item._id} details={item} />
-            ))}
-        </Row>
+        <PhotoProvider>
+          <Row xs={1} md={2} lg={3} className="g-4">
+            {services &&
+              services.map((item) => (
+                <ServiceCard key={item._id} details={item} />
+              ))}
+          </Row>
+        </PhotoProvider>
         <div className="d-flex justify-content-center my-5">
           <Link to="/services">
             {" "}
