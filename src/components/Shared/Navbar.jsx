@@ -82,7 +82,7 @@ export default function NavBar({ darkActive, setDarkActive }) {
           as={NavLink}
           onClick={closeMenu}
           to="/register"
-          state={{ from: location?.state?.from }}
+          state={{ from: location?.state?.from, prev: location }}
           replace
         >
           Register
@@ -91,7 +91,7 @@ export default function NavBar({ darkActive, setDarkActive }) {
           as={NavLink}
           onClick={closeMenu}
           to="/login"
-          state={{ from: location?.state?.from }}
+          state={{ from: location?.state?.from, prev: location }}
           replace
         >
           Login

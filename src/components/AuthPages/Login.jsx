@@ -22,6 +22,7 @@ export default function Login() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  console.log(location?.state?.from, location?.state?.prev);
   // Redirecting if User is Authenticated
   /*
   if (activeUser || activeUser?.uid) {
@@ -44,7 +45,9 @@ export default function Login() {
         await requestToken(user.uid);
         setActiveUser(user);
         form.reset();
-        navigate(location?.state?.from || "/", { replace: true });
+        navigate(location?.state?.from || location?.state?.prev || "/", {
+          replace: true,
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -58,7 +61,9 @@ export default function Login() {
       .then(async ({ user }) => {
         await requestToken(user.uid);
         setActiveUser(user);
-        navigate(location?.state?.from || "/", { replace: true });
+        navigate(location?.state?.from || location?.state?.prev || "/", {
+          replace: true,
+        });
       })
       .catch((error) => setError(error));
   };
@@ -69,7 +74,9 @@ export default function Login() {
       .then(async ({ user }) => {
         await requestToken(user.uid);
         setActiveUser(user);
-        navigate(location?.state?.from || "/", { replace: true });
+        navigate(location?.state?.from || location?.state?.prev || "/", {
+          replace: true,
+        });
       })
       .catch((error) => setError(error));
   };

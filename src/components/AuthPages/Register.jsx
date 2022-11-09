@@ -49,7 +49,9 @@ export default function Register() {
         if (displayName && photoURL) {
           handleUpdate(profileObj);
         }
-        navigate(location?.state?.from || "/", { replace: true });
+        navigate(location?.state?.from || location?.state?.prev || "/", {
+          replace: true,
+        });
       })
       .catch((error) => setError(error));
   };
@@ -66,7 +68,9 @@ export default function Register() {
       .then(async ({ user }) => {
         await requestToken(user.uid);
         setActiveUser(user);
-        navigate(location?.state?.from || "/", { replace: true });
+        navigate(location?.state?.from || location?.state?.prev || "/", {
+          replace: true,
+        });
       })
       .catch((error) => setError(error));
   };
@@ -77,7 +81,9 @@ export default function Register() {
       .then(async ({ user }) => {
         await requestToken(user.uid);
         await setActiveUser(user);
-        navigate(location?.state?.from || "/", { replace: true });
+        navigate(location?.state?.from || location?.state?.prev || "/", {
+          replace: true,
+        });
       })
       .catch((error) => setError(error));
   };

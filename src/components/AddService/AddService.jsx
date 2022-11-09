@@ -7,6 +7,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import toast from "react-hot-toast";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddService() {
   const [title, setTitle] = useState("");
@@ -14,6 +15,7 @@ export default function AddService() {
   const [price, setPrice] = useState(0);
   const [photoUrl, setPhotoUrl] = useState("");
 
+  const navigate = useNavigate();
   const handleServiceSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -42,6 +44,7 @@ export default function AddService() {
         setPrice(0);
         setPhotoUrl("");
         toast.success("Successfully posted a new Service");
+        navigate("/services");
       } else {
         toast.error("FAILED to post a new service");
       }
