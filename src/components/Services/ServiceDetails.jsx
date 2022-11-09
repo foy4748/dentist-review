@@ -183,7 +183,7 @@ export default function ServiceDetails() {
           <div className="form-container">
             <h2>Add Review </h2>
             {!auth.currentUser && loginJSX}
-            {auth.currentUser && !loading2 ? formJSX : <Loader />}
+            {auth.currentUser && formJSX}
           </div>
           <div>
             {loading2 ? (
