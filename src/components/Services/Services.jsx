@@ -35,7 +35,7 @@ export default function Services() {
   return (
     <div>
       <h1>Services</h1>
-      <Container>
+      <Container className="mt-5">
         <PhotoProvider>
           <Row xs={1} md={2} lg={3} className="g-4">
             {services || !services.error ? (

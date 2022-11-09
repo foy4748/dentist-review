@@ -33,8 +33,9 @@ export default function Home() {
   return (
     <>
       <Banner services={services} />
-      <div>
+      <div className="mt-5">
         <Container>
+          <h1>Latest Services</h1>
           <PhotoProvider>
             <Row xs={1} md={2} lg={3} className="g-4">
               {services &&

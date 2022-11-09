@@ -11,7 +11,9 @@ export default function FooterSection() {
             <div className="row">
               <div className="col-md-6 mt-md-0 mt-3">
                 <h5 className="text-uppercase">{AppName}</h5>
-                <p>Go to next level to your FrontEnd Development journey.</p>
+                <p>
+                  <strong>No Pain No Gain is an exception here</strong>
+                </p>
               </div>
 
               <hr className="clearfix w-100 d-md-none pb-0" />
@@ -20,13 +22,10 @@ export default function FooterSection() {
                 <h5 className="text-uppercase">Pages</h5>
                 <ul className="list-unstyled">
                   <li>
-                    <Link to="/topics">Topics</Link>
+                    <Link to="/services">Services</Link>
                   </li>
                   <li>
                     <Link to="/blogs">Blogs</Link>
-                  </li>
-                  <li>
-                    <Link to="/faqs">FAQs</Link>
                   </li>
                 </ul>
               </div>

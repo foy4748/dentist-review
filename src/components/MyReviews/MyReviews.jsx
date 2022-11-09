@@ -82,7 +82,11 @@ export default function MyReview() {
               title="Delete Review"
               onClick={() => handleDelete(_id)}
               icon={faCircleXmark}
-              style={{ fontSize: "1rem" }}
+              style={{
+                fontSize: "1.25rem",
+                color: "red",
+                cursor: "pointer",
+              }}
             />{" "}
           </td>
           <td>
@@ -91,7 +95,7 @@ export default function MyReview() {
               <FontAwesomeIcon
                 title="Edit Review"
                 icon={faPenToSquare}
-                style={{ fontSize: "1rem" }}
+                style={{ fontSize: "1.25rem" }}
               />
             </Link>
           </td>

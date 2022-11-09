@@ -36,7 +36,6 @@ export default function MainLayout() {
         </section>
         <FooterSection />
       </AuthContext>
-      ;
     </>
   );
 }
