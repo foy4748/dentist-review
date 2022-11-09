@@ -7,6 +7,8 @@ import { Form, Button, Container } from "react-bootstrap";
 
 import toast from "react-hot-toast";
 
+import Loader from "../Shared/Loader";
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,14 +17,18 @@ export default function AddService() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [photoUrl, setPhotoUrl] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     window.document.title = `${AppName} || Add Service`;
+    setLoading(false);
   }, []);
+
   const handleServiceSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const payload = {
         title,
@@ -44,6 +50,7 @@ export default function AddService() {
       const res = await fetch(`${SERVER}/services`, options);
       const result = await res.json();
       if (!result.error) {
+        setLoading(false);
         setTitle("");
         setDescription("");
         setPrice(0);
@@ -51,9 +58,11 @@ export default function AddService() {
         toast.success("Successfully posted a new Service");
         navigate("/services");
       } else {
+        setLoading(false);
         toast.error("FAILED to post a new service");
       }
     } catch (error) {
+      setLoading(false);
       console.error(error);
       toast.error("FAILED to post a new service");
     }

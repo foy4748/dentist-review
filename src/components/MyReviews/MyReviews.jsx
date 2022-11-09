@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 import moment from "moment";
 import styles from "./MyReviews.module.css";
 
+import Loader from "../Shared/Loader";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleXmark,
@@ -17,6 +19,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 export default function MyReview() {
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
   useEffect(() => {
     window.document.title = `${AppName} || My Reviews`;
@@ -29,7 +32,10 @@ export default function MyReview() {
     };
     fetch(`${SERVER}/my-comments`, options)
       .then((res) => res.json())
-      .then(({ data }) => setReviews(data))
+      .then(({ data }) => {
+        setReviews(data);
+        setLoading(false);
+      })
       .catch((error) => console.error(error));
   }, []);
 
@@ -93,6 +99,10 @@ export default function MyReview() {
       </>
     );
   };
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className={styles.myreviewContainer}>
       {reviews.length > 0 ? (
