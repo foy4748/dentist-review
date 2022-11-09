@@ -1,5 +1,7 @@
 import styles from "./Footer.module.css";
 import { Link } from "react-router-dom";
+const AppName = import.meta.env.VITE_AppName;
+
 export default function FooterSection() {
   return (
     <>
@@ -8,7 +10,7 @@ export default function FooterSection() {
           <div className="container-fluid text-center text-md-left">
             <div className="row">
               <div className="col-md-6 mt-md-0 mt-3">
-                <h5 className="text-uppercase">Rectify</h5>
+                <h5 className="text-uppercase">{AppName}</h5>
                 <p>Go to next level to your FrontEnd Development journey.</p>
               </div>
 

@@ -2,6 +2,8 @@
 import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import { useRef, useContext } from "react";
 
+const AppName = import.meta.env.VITE_AppName;
+
 import {
   Container,
   Nav,
@@ -166,7 +168,7 @@ export default function NavBar({ darkActive, setDarkActive }) {
             />
           </Navbar.Brand>
           <Navbar.Brand as={Link} to="/">
-            Reactify
+            {AppName}
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="responsive-navbar-nav"

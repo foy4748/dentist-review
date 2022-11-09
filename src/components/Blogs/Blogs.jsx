@@ -1,12 +1,19 @@
+const AppName = import.meta.env.VITE_AppName;
+
+import { useEffect } from "react";
+
 import { Container } from "react-bootstrap";
 import styles from "./Blogs.module.css";
+
 export default function Blogs() {
+  useEffect(() => {
+    window.document.title = `${AppName} || Blogs`;
+  }, []);
   return (
     <Container>
+      <h1>Blogs</h1>
       <div className={styles.blogContainer}>
-        <div className="mb-5">
-          <h1>Blogs</h1>
-        </div>
+        <div className="mb-5"></div>
         <div className={styles.singleBlog}>
           <h1>1. Difference between SQL and NoSQL</h1>
           <div className={styles.answer}>

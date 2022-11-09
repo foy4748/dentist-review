@@ -15,6 +15,7 @@ import { Form, Container } from "react-bootstrap";
 
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
+const AppName = import.meta.env.VITE_AppName;
 
 export default function ServiceDetails() {
   const { authLoading } = useContext(userContext);
@@ -33,6 +34,7 @@ export default function ServiceDetails() {
     fetch(`${SERVER}/service/${id}`)
       .then((res) => res.json())
       .then(({ data }) => {
+        window.document.title = `Service || ${data?.title}`;
         setService(data);
         setLoading(false);
       })

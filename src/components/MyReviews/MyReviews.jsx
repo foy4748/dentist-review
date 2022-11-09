@@ -1,3 +1,4 @@
+const AppName = import.meta.env.VITE_AppName;
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
 
@@ -18,6 +19,7 @@ export default function MyReview() {
   const [reviews, setReviews] = useState([]);
   const location = useLocation();
   useEffect(() => {
+    window.document.title = `${AppName} || My Reviews`;
     const authtoken = localStorage.getItem("authtoken");
     const options = {
       headers: {

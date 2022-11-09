@@ -1,17 +1,22 @@
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
+const AppName = import.meta.env.VITE_AppName;
 
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { PhotoProvider } from "react-photo-view";
 
 import ServiceCard from "../Services/ServiceCard";
+// Dumb Components
+import Hero from "./Hero";
+import FeatureCards from "./FeatureCards";
 
 import { useEffect, useState } from "react";
 export default function Home() {
   const [services, setServices] = useState([]);
   useEffect(() => {
     let limit = 3;
+    window.document.title = `${AppName} || Home`;
     const options = {
       headers: {
         "Content-Type": "application/json",
@@ -41,6 +46,12 @@ export default function Home() {
             <button className="btnPrimary">See All</button>
           </Link>
         </div>
+      </Container>
+      <Container>
+        <FeatureCards />
+      </Container>
+      <Container>
+        <Hero />
       </Container>
     </div>
   );

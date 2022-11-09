@@ -1,12 +1,13 @@
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
+const AppName = import.meta.env.VITE_AppName;
 import styles from "./AddService.module.css";
 
 import { Form, Button, Container } from "react-bootstrap";
 
 import toast from "react-hot-toast";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AddService() {
@@ -16,6 +17,10 @@ export default function AddService() {
   const [photoUrl, setPhotoUrl] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.document.title = `${AppName} || Add Service`;
+  }, []);
   const handleServiceSubmit = async (e) => {
     e.preventDefault();
     try {
