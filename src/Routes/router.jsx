@@ -19,6 +19,8 @@ import Register from "../components/AuthPages/Register";
 import Services from "../components/Services/Services";
 import ServiceDetails from "../components/Services/ServiceDetails";
 
+// Blog Page
+import Blogs from "../components/Blogs/Blogs";
 // Private Routes ------
 // My Reviews
 import MyReviews from "../components/MyReviews/MyReviews";
@@ -47,6 +49,10 @@ const routerObj = [
       {
         path: "/services",
         element: <Services />,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
       },
       {
         path: "/services/:id",

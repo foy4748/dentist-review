@@ -105,10 +105,10 @@ export default function NavBar({ darkActive, setDarkActive }) {
       <>
         <Nav.Link as={NavLink} onClick={closeMenu} to="/my-reviews">
           My Reviews
-        </Nav.Link>{" "}
+        </Nav.Link>
         <Nav.Link as={NavLink} onClick={closeMenu} to="/add-service">
           Add Service
-        </Nav.Link>{" "}
+        </Nav.Link>
         <Nav.Link
           onClick={() => {
             closeMenu();
@@ -176,6 +176,9 @@ export default function NavBar({ darkActive, setDarkActive }) {
             <Nav className="me-auto">
               <Nav.Link as={NavLink} onClick={closeMenu} to="/services">
                 Services
+              </Nav.Link>
+              <Nav.Link as={NavLink} onClick={closeMenu} to="/blogs">
+                Blogs
               </Nav.Link>
               {activeUser && activeUser.uid && privateNavItems()}
             </Nav>

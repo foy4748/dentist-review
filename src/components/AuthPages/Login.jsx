@@ -22,7 +22,6 @@ export default function Login() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log(location?.state?.from, location?.state?.prev);
   // Redirecting if User is Authenticated
   /*
   if (activeUser || activeUser?.uid) {
