@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import StarRatings from "react-star-ratings";
 
 import toast from "react-hot-toast";
 import { Form, Container } from "react-bootstrap";
+
+import styles from "./EditMyReview.module.css";
 
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
@@ -12,6 +14,8 @@ export default function EditMyReview() {
   const [review, setReview] = useState({});
   const { id } = useParams();
 
+  const location = useLocation();
+  const navigate = useNavigate();
   // Form Values
   const [currentReview, setCurrentReview] = useState("");
   const [currentRaing, setCurrentRating] = useState(5);
@@ -61,6 +65,7 @@ export default function EditMyReview() {
         toast.success("Successfully Edited Review");
         setCurrentReview("");
         setCurrentRating(5);
+        navigate(location?.state?.from || "/");
       } else {
         toast.error("FAILED to edit review");
       }
@@ -70,37 +75,34 @@ export default function EditMyReview() {
     }
   };
   const formJSX = (
-    <Form onSubmit={handleReviewSubmit}>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <div>
-          <StarRatings
-            rating={currentRaing}
-            starRatedColor="#fdff6c"
-            changeRating={changeRating}
-            numberOfStars={5}
-            name="rating"
+    <section className={styles.formContainer}>
+      <Form onSubmit={handleReviewSubmit} className={styles.editForm}>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <div>
+            <StarRatings
+              rating={currentRaing}
+              starRatedColor="#fdff6c"
+              changeRating={changeRating}
+              numberOfStars={5}
+              name="rating"
+            />
+          </div>
+          <Form.Label>Enter Review</Form.Label>
+          <Form.Control
+            as="textarea"
+            name="review"
+            value={currentReview}
+            onChange={(e) => setCurrentReview(e.target.value)}
+            rows={3}
+            placeholder="Write your opinions"
           />
-        </div>
-        <Form.Label>Enter Review</Form.Label>
-        <Form.Control
-          as="textarea"
-          name="review"
-          value={currentReview}
-          onChange={(e) => setCurrentReview(e.target.value)}
-          rows={3}
-          placeholder="Write your opinions"
-        />
-      </Form.Group>
-      <button type="submit" className="btnPrimary">
-        Edit Review
-      </button>
-    </Form>
+        </Form.Group>
+        <button type="submit" className="btnPrimary">
+          Edit Review
+        </button>
+      </Form>
+    </section>
   );
 
-  return (
-    <div>
-      <p>{id}</p>
-      {formJSX}
-    </div>
-  );
+  return <div>{formJSX}</div>;
 }

@@ -2,7 +2,7 @@ const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import toast from "react-hot-toast";
 
@@ -16,6 +16,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 export default function MyReview() {
   const [reviews, setReviews] = useState([]);
+  const location = useLocation();
   useEffect(() => {
     const authtoken = localStorage.getItem("authtoken");
     const options = {
@@ -57,13 +58,15 @@ export default function MyReview() {
   };
 
   const SingleRowJSX = ({ item, idx }) => {
-    const { service_title, time, review, rating, _id } = item;
+    const { service_id, service_title, time, review, rating, _id } = item;
     return (
       <>
         <tr key={_id}>
           <td>{idx + 1}</td>
           <td>{moment(time).format("DD MMM")}</td>
-          <td>{service_title}</td>
+          <td>
+            <Link to={`/services/${service_id}`}>{service_title}</Link>
+          </td>
           <td>{review}</td>
           <td>{rating}</td>
           <td>
@@ -75,7 +78,7 @@ export default function MyReview() {
             />{" "}
           </td>
           <td>
-            <Link to={`/my-reviews/${_id}`}>
+            <Link to={`/my-reviews/${_id}`} state={{ from: location }}>
               {" "}
               <FontAwesomeIcon
                 title="Edit Review"
