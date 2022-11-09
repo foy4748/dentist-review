@@ -70,8 +70,8 @@ export default function MyReview() {
     return (
       <>
         <tr key={_id}>
-          <td>{idx + 1}</td>
-          <td>{moment(time).format("DD MMM")}</td>
+          <td className="d-none d-lg-block">{idx + 1}</td>
+          <td className="d-none d-lg-block">{moment(time).format("DD MMM")}</td>
           <td>
             <Link to={`/services/${service_id}`}>{service_title}</Link>
           </td>
@@ -115,8 +115,8 @@ export default function MyReview() {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
-                <th>Date</th>
+                <th className="d-none d-lg-block">#</th>
+                <th className="d-none d-lg-block">Date</th>
                 <th>Service Name</th>
                 <th>Review</th>
                 <th>Rating</th>

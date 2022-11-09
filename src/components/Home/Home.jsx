@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { PhotoProvider } from "react-photo-view";
 
 import ServiceCard from "../Services/ServiceCard";
+import Loader from "../Shared/Loader";
+
 // Dumb Components
 import Banner from "./Banner";
 import Hero from "./Hero";
@@ -15,6 +17,8 @@ import FeatureCards from "./FeatureCards";
 import { useEffect, useState } from "react";
 export default function Home() {
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     let limit = 3;
     window.document.title = `${AppName} || Home`;
@@ -27,11 +31,18 @@ export default function Home() {
     fetch(`${SERVER}/services`, options)
       .then((res) => res.json())
       .then(({ data }) => {
+        setLoading(false);
         setServices(data);
-      });
+      })
+      .catch((error) => console.error(error));
   });
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <>
+    <div>
       <Banner services={services} />
       <div className="mt-5">
         <Container>
@@ -40,8 +51,8 @@ export default function Home() {
             <Row xs={1} lg={3} className="g-4">
               {services &&
                 services.map((item) => (
-                  <Col>
-                    <ServiceCard key={item._id} details={item} />
+                  <Col key={item._id}>
+                    <ServiceCard details={item} />
                   </Col>
                 ))}
             </Row>
@@ -60,6 +71,6 @@ export default function Home() {
           <Hero />
         </Container>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { userContext } from "../../Contexts/AuthContext";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
 import styles from "./Register.module.css";
@@ -176,30 +176,25 @@ export default function Register() {
             ""
           )}
         </Form.Group>
-        <Button className="border readBtn" variant="outline-dark" type="submit">
+        <button className="border btnPrimary" type="submit">
           Submit
-        </Button>
+        </button>
       </Form>
       <hr />
       <h1 className="text-center">Continue using</h1>
       <div className="d-flex justify-content-center">
-        <Button
-          onClick={handlerGoogleLogin}
-          className="border readBtn"
-          variant="outline-dark"
-        >
+        <button onClick={handlerGoogleLogin} className="border btnPrimary">
           {" "}
           <FontAwesomeIcon icon={faGoogle} /> Google{" "}
-        </Button>
-        <Button
-          onClick={handlerGithubLogin}
-          className="border readBtn"
-          variant="outline-dark"
-        >
-          {" "}
-          <FontAwesomeIcon icon={faGithub} /> Github{" "}
-        </Button>
+        </button>
       </div>
     </div>
   );
 }
+
+/*
+        <button onClick={handlerGithubLogin} className="border btnPrimary">
+          {" "}
+          <FontAwesomeIcon icon={faGithub} /> Github{" "}
+        </button>
+ */

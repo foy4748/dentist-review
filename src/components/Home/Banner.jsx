@@ -10,19 +10,17 @@ export default function Banner({ services }) {
         <strong>No Pain No Gain is an exception here</strong>
       </p>
       <Link to="/services">
-        <button className="boder btnPrimary" variant="outline-dark">
-          Services
-        </button>
+        <button className="boder btnPrimary">Services</button>
       </Link>
     </div>
   );
   const carauselItemJSX = ({ title, _id }, idx) => {
     return (
-      <Carousel.Item interval={3000}>
+      <Carousel.Item interval={3000} key={_id}>
         <img
           className="d-block w-100 carauselImg"
           src={`/0${idx + 1}.jpg`}
-          alt="/01.jpg"
+          alt={title}
         />
         <Carousel.Caption className="centeringCaption">
           <div className="d-flex justify-content-between">
@@ -34,9 +32,7 @@ export default function Banner({ services }) {
                 <strong>Practicing for 8 years</strong>
               </p>
               <Link to={`/services/${_id}`}>
-                <button className="boder btnPrimary" variant="outline-dark">
-                  View Details
-                </button>
+                <button className="boder btnPrimary">View Details</button>
               </Link>
             </div>
           </div>
@@ -47,11 +43,8 @@ export default function Banner({ services }) {
 
   return (
     <Carousel className="carauselContainer">
-      {services?.length > 0 ? (
-        services.map((item, idx) => carauselItemJSX(item, idx))
-      ) : (
-        <Loader />
-      )}
+      {services?.length > 0 &&
+        services.map((item, idx) => carauselItemJSX(item, idx))}
     </Carousel>
   );
 }

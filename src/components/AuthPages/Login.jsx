@@ -155,6 +155,13 @@ export default function Login() {
           {" "}
           <FontAwesomeIcon icon={faGoogle} /> Google{" "}
         </button>
+      </div>
+    </div>
+  );
+}
+
+/*
+ 
         <button
           onClick={handlerGithubLogin}
           className="border btnPrimary"
@@ -163,7 +170,4 @@ export default function Login() {
           {" "}
           <FontAwesomeIcon icon={faGithub} /> Github{" "}
         </button>
-      </div>
-    </div>
-  );
-}
+*/

@@ -3,7 +3,7 @@ const SERVER =
 const AppName = import.meta.env.VITE_AppName;
 import styles from "./AddService.module.css";
 
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Container } from "react-bootstrap";
 
 import toast from "react-hot-toast";
 
@@ -114,9 +114,9 @@ export default function AddService() {
             placeholder="Photo URL"
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <button className="btnPrimary" type="submit">
           Submit
-        </Button>
+        </button>
       </Form>
     </Container>
   );
