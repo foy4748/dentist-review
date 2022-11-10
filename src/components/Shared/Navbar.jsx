@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-regular-svg-icons";
 
 import { userContext } from "../../Contexts/AuthContext";
+import toast from "react-hot-toast";
 
 import { getAuth } from "firebase/auth";
 import firebaseApp from "../../firebase.config.js";
@@ -40,11 +41,17 @@ export default function NavBar({ darkActive, setDarkActive }) {
   };
 
   const handleLogOut = () => {
-    logOutHandler().then(() => {
-      window.localStorage.clear("authtoken");
-      setActiveUser(null);
-      navigate("/");
-    });
+    logOutHandler()
+      .then(() => {
+        window.localStorage.clear("authtoken");
+        setActiveUser(null);
+        toast.success("Successfully Logged Out");
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error("FAILED to Log Out");
+        console.error(error);
+      });
   };
   //--------------------------------------
 

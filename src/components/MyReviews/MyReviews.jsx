@@ -12,15 +12,18 @@ import styles from "./MyReviews.module.css";
 
 import Loader from "../Shared/Loader";
 
+// Import FontAwesome Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleXmark,
   faPenToSquare,
 } from "@fortawesome/free-regular-svg-icons";
+
 export default function MyReview() {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+
   useEffect(() => {
     window.document.title = `${AppName} || My Reviews`;
     const authtoken = localStorage.getItem("authtoken");
@@ -39,9 +42,11 @@ export default function MyReview() {
       .catch((error) => console.error(error));
   }, []);
 
+  // Handle Review Delete
   const handleDelete = async (id) => {
     setLoading(true);
     try {
+      // Preparing data for DELETE operation
       const authtoken = localStorage.getItem("authtoken");
       const options = {
         method: "DELETE",
@@ -51,6 +56,8 @@ export default function MyReview() {
           review_id: id,
         },
       };
+
+      // Handling Response
       const res = await fetch(`${SERVER}/delete-comment`, options);
       const result = await res.json();
       if (!result.error) {
@@ -70,6 +77,7 @@ export default function MyReview() {
     }
   };
 
+  // JSX fragment
   const SingleRowJSX = ({ item, idx }) => {
     const { service_id, service_title, time, review, rating, _id } = item;
     return (
@@ -138,7 +146,7 @@ export default function MyReview() {
         </>
       ) : (
         <div className={styles.titleContainer}>
-          <h1>No reviews yet</h1>
+          <h1>No reviews were added</h1>
         </div>
       )}
     </div>

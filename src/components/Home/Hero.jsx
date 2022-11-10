@@ -47,11 +47,7 @@ export default function Hero() {
               proper alignment of the teeth. This wire and brackets against the
               teeth to put pressure upon teeth to move towards a proper fixed
               position. There are many kinds of braces available having
-              different brackets. Children prefer the colored ones. The adults
-              feel shy wearing the visible braces in public, they put some
-              special customized trays or aligners, they provide same shade of
-              all teeth. The studies suggest that braces work better and
-              efficient than the custom trays and aligners.
+              different brackets. Children prefer the colored ones.
             </p>
           </div>
         </aside>

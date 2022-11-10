@@ -19,6 +19,8 @@ export default function Home() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Requesting for 3 services
+  // for Home page
   useEffect(() => {
     let limit = 3;
     window.document.title = `${AppName} || Home`;
@@ -37,6 +39,8 @@ export default function Home() {
       .catch((error) => console.error(error));
   });
 
+  // Loading Spinner
+  // until response is received
   if (loading) {
     return <Loader />;
   }

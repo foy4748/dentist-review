@@ -3,8 +3,9 @@
 
 ## Links
 - Live Website: [Netlify](https://p-hero-foy4748-assignment-11.netlify.app/)
-- CLIENT Repo: [Github](https://github.com/Porgramming-Hero-web-course/b6a11-service-review-client-side-foy4748)
-- SERVER Repo: [Github](https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-foy4748)
+- CLIENT Repo: [Github](https://github.com/foy4748/dentist-review)
+- SERVER Repo: [Github](https://github.com/foy4748/dentist-review-server)
+- Requirements: [Github](https://github.com/ProgrammingHero1/Service-Review-Assignment/blob/main/task_description.md)
 
 # Features
 - Responsive Design

@@ -21,8 +21,10 @@ export default function ServiceDetails() {
   const { authLoading } = useContext(userContext);
   const [service, setService] = useState({});
   const [reviews, setReviews] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [loading2, setLoading2] = useState(true);
+
+  const [loading, setLoading] = useState(true); // Loading State for Description Section
+  const [loading2, setLoading2] = useState(true); // Loading State for Reviews Section
+
   const location = useLocation();
   const { id } = useParams();
 
@@ -40,6 +42,8 @@ export default function ServiceDetails() {
       })
       .catch((error) => console.error(error));
 
+    // Sending service_id via Headers
+    // for Query
     const options = {
       headers: {
         "Content-Type": "application/json",
@@ -47,6 +51,7 @@ export default function ServiceDetails() {
       },
     };
 
+    // Fetching Service Specific Reviews
     fetch(`${SERVER}/comments`, options)
       .then((res) => res.json())
       .then(({ data }) => {
@@ -66,12 +71,14 @@ export default function ServiceDetails() {
     setLoading2(true);
     const authtoken = localStorage.getItem("authtoken");
     try {
-      const { displayName, email } = auth.currentUser;
+      // Preparing data for POST review operation
+      const { displayName, email, photoURL } = auth.currentUser;
       const payload = {
         rating,
         review,
         email,
         displayName,
+        photoURL,
         time: new Date(),
         service_title: service.title,
       };
@@ -85,6 +92,7 @@ export default function ServiceDetails() {
         body: JSON.stringify(payload),
       };
 
+      // Handling Response
       const res = await fetch(`${SERVER}/comments`, options);
       const result = await res.json();
       if (!result.error) {
@@ -141,6 +149,7 @@ export default function ServiceDetails() {
       </button>
     </Form>
   );
+
   const loginJSX = (
     <p>
       Please,

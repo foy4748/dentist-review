@@ -14,8 +14,7 @@ export default function FeatureCards() {
           <Card.Text className="overflowControl">
             Fluoride is tooth enamel's best friend as it helps support the
             minerals found in enamel and fights against bacteria attacking the
-            enamel. The best way to utilize fluoride on a daily basis is to use
-            a fluoride-based toothpaste and mouthwash.
+            enamel.
           </Card.Text>
         </Card.ImgOverlay>
       </Card>

@@ -7,12 +7,17 @@ import { PhotoProvider } from "react-photo-view";
 
 import Loader from "../Shared/Loader";
 
+import toast from "react-hot-toast";
 import ServiceCard from "./ServiceCard";
+
 export default function Services() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     document.title = "Dr. Hakim || Services";
+
+    // Fetching All Services
     try {
       fetch(`${SERVER}/services`)
         .then((res) => res.json())
@@ -21,10 +26,11 @@ export default function Services() {
           setLoading(false);
         });
     } catch (error) {
-      alert("NETWORK ERROR");
+      toast.error("NETWORK ERROR");
       setLoading(false);
     }
   }, []);
+
   if (loading) {
     return <Loader />;
   }
@@ -32,6 +38,7 @@ export default function Services() {
   const serviceCardsJSX = (obj) => {
     return <ServiceCard details={obj} key={obj._id} />;
   };
+
   return (
     <div>
       <h1>Services</h1>

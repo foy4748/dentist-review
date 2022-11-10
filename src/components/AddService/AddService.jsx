@@ -1,10 +1,9 @@
 const SERVER =
   import.meta.env.VITE_SERVER_ADDRESS || import.meta.env.VITE_DEV_SERVER;
 const AppName = import.meta.env.VITE_AppName;
+
 import styles from "./AddService.module.css";
-
 import { Form, Container } from "react-bootstrap";
-
 import toast from "react-hot-toast";
 
 import Loader from "../Shared/Loader";
@@ -13,23 +12,28 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AddService() {
+  const [loading, setLoading] = useState(true);
+
+  // Form Values
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [photoUrl, setPhotoUrl] = useState("");
-  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
+  // For Loading Spinner
   useEffect(() => {
     window.document.title = `${AppName} || Add Service`;
     setLoading(false);
   }, []);
 
+  // Handle New Service Submit
   const handleServiceSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
+      // Preparing Data for Submission
       const payload = {
         title,
         description,
@@ -37,6 +41,8 @@ export default function AddService() {
         img: photoUrl,
         time: new Date(),
       };
+
+      // Setting Headers
       const authtoken = localStorage.getItem("authtoken");
       const options = {
         method: "POST",
@@ -47,6 +53,7 @@ export default function AddService() {
         body: JSON.stringify(payload),
       };
 
+      // Handling Response
       const res = await fetch(`${SERVER}/services`, options);
       const result = await res.json();
       if (!result.error) {

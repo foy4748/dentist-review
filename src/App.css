@@ -29,6 +29,13 @@
   height: 2rem !important;
 }
 
+.userReviewIcon {
+  width: 2.75rem;
+  max-height: 2.75rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
 .userIcon {
   width: 1.75rem;
   max-height: 1.75rem;

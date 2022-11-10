@@ -13,12 +13,14 @@ const SERVER =
 const AppName = import.meta.env.VITE_AppName;
 
 export default function EditMyReview() {
+  // Executing Hooks
   const [review, setReview] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
   const location = useLocation();
   const navigate = useNavigate();
+
   // Form Values
   const [currentReview, setCurrentReview] = useState("");
   const [currentRaing, setCurrentRating] = useState(5);
@@ -32,6 +34,8 @@ export default function EditMyReview() {
         authtoken,
       },
     };
+
+    // Fetching user specific reviews
     fetch(`${SERVER}/my-comments/${id}`, options)
       .then((res) => res.json())
       .then(({ data }) => {
@@ -45,15 +49,18 @@ export default function EditMyReview() {
       });
   }, []);
 
+  // Event Handlers
   const changeRating = (newRating) => {
     setCurrentRating(newRating);
   };
 
+  // Handle Edited Review Submit
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     const authtoken = localStorage.getItem("authtoken");
     try {
+      // Preparing data for PATCH operation.
       const payload = {
         rating: currentRaing,
         review: currentReview,
@@ -68,6 +75,7 @@ export default function EditMyReview() {
         body: JSON.stringify(payload),
       };
 
+      // Handling Response
       const res = await fetch(`${SERVER}/my-comments/${id}`, options);
       const result = await res.json();
       if (!result.error) {
@@ -88,6 +96,8 @@ export default function EditMyReview() {
       toast.error("FAILED to edit review");
     }
   };
+
+  // JXS fragment: FORM
   const formJSX = (
     <>
       <h1>Edit Review</h1>
